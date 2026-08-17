@@ -1,0 +1,204 @@
+---
+layout: default
+title: Omar Maali Hussein — Solution Architect & AI Engineer
+---
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">{{ site.tagline }}</p>
+    <h1>I build AI systems that know what they don&rsquo;t know.</h1>
+    <p class="lede">
+      Fifteen years designing enterprise systems, now spent on agentic AI, retrieval,
+      and the evaluation work most teams skip. Everything below is published with its
+      evidence, <em>including the results that went against me</em>.
+    </p>
+    <div class="cta">
+      <a class="btn" href="#work">See the work</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+    <div class="facts">
+      <span><b>15 years</b> in solution architecture</span>
+      <span><b>9&times;</b> OutSystems certified</span>
+      <span><b>MSc</b> Big Data Analytics</span>
+      <span><b>6</b> published projects</span>
+    </div>
+  </div>
+</section>
+
+<section id="expertise">
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">What I work on</p>
+      <h2>Four things, and the proof for each</h2>
+      <p>
+        The common thread is not a stack. It's that a system should be able to tell you
+        when it doesn't know, and that the claim should be testable by someone other
+        than the person who wrote it.
+      </p>
+    </div>
+    <div class="grid2">
+      <div class="tile">
+        <h3>Agentic systems with human control</h3>
+        <p>
+          Agents that propose and then stop. Policy-driven approval gates, tool
+          allowlists, step budgets, and an append-only log of every model call, tool
+          call and human decision. Autonomy is a dial you open on evidence, not a
+          default you ship with.
+        </p>
+        <p class="ref">Worked through in <a href="#acme-triage-agent">Acme Triage Agent</a></p>
+      </div>
+      <div class="tile">
+        <h3>Retrieval you can audit</h3>
+        <p>
+          RAG that resolves every citation to a document, section and page, scores its
+          own confidence, and declines rather than guesses. Chunking that never lets one
+          chunk straddle two policies, and thresholds that were measured rather than
+          picked.
+        </p>
+        <p class="ref">Worked through in <a href="#acme-support-assistant">Acme Support Assistant</a></p>
+      </div>
+      <div class="tile">
+        <h3>Evaluation and guardrail testing</h3>
+        <p>
+          Held-out sets written in real user language, calibration curves that turn a
+          refusal rate into a business decision, and mutation testing that proves a
+          guardrail is actually covered by deleting it and watching what fails. A
+          passing suite is not evidence on its own.
+        </p>
+        <p class="ref">Worked through in <a href="#llmcheck">llmcheck</a></p>
+      </div>
+      <div class="tile">
+        <h3>AI adoption for engineering teams</h3>
+        <p>
+          Spec, generate, review, test. Working agreements that say which data never
+          goes into a prompt, review checklists aimed at how generated code actually
+          fails, and a rollout that starts with a small pilot on low-risk work rather
+          than a tool announcement.
+        </p>
+        <p class="ref">Worked through in <a href="#ai-dev-playbook">AI Dev Playbook</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">Selected work</p>
+      <h2>Six projects, each published with what it does not prove</h2>
+      <p>
+        Every repository below states its limits in its own README. Where a result went
+        against the hypothesis, the result is the headline rather than a footnote.
+      </p>
+    </div>
+
+    {% for p in site.data.projects %}
+    {% assign anchor = p.title | downcase | replace: ' ', '-' | replace: '&', 'and' %}
+    <article class="proj" id="{{ anchor }}">
+      <div class="shot">
+        <a href="{{ '/assets/img/' | append: p.image | append: '.webp' | relative_url }}"
+           title="Open the full-size diagram">
+          <img src="{{ '/assets/img/' | append: p.image | append: '-card.webp' | relative_url }}"
+               alt="{{ p.alt }}" loading="lazy" decoding="async">
+        </a>
+      </div>
+      <div class="body">
+        <h3>{{ p.title }}</h3>
+        <p class="kicker">{{ p.kicker }}</p>
+        <ul>
+          {% for pt in p.points %}<li>{{ pt }}</li>{% endfor %}
+        </ul>
+        <div class="tags">
+          {% for t in p.tags %}<span>{{ t }}</span>{% endfor %}
+        </div>
+        <div class="meta">
+          {% for l in p.links %}
+          <a href="{% if l.url == 'SITE_OUTSYSTEMS_ARTICLE' %}{{ site.outsystems_article }}{% else %}{{ l.url }}{% endif %}" rel="noopener">{{ l.text }} &rarr;</a>
+          {% endfor %}
+          {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">Writing</p>
+      <h2>Notes from building the things above</h2>
+      <p>
+        Mostly the parts that didn't work first time, because those are the ones worth
+        reading.
+      </p>
+    </div>
+    {% if site.posts.size > 0 %}
+    <div class="posts">
+      {% for post in site.posts limit: 4 %}
+      <a class="post-row" href="{{ post.url | relative_url }}">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.summary | default: post.excerpt | strip_html | truncatewords: 28 }}</p>
+      </a>
+      {% endfor %}
+    </div>
+    {% if site.posts.size > 4 %}
+    <p style="margin-top:20px"><a href="{{ '/writing/' | relative_url }}">All posts &rarr;</a></p>
+    {% endif %}
+    {% else %}
+    <div class="empty">First post coming shortly.</div>
+    {% endif %}
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">Background</p>
+      <h2>Where the judgment comes from</h2>
+    </div>
+    <div class="creds">
+      <div class="cred">
+        <h4>Experience</h4>
+        <ul>
+          <li><b>Solution architecture, 15 years</b> APIs, system integration and platform design across enterprise environments.</li>
+          <li><b>Agentic AI and RAG</b> OpenAI APIs, LangChain, vector stores, agent tool use, evaluation harnesses.</li>
+          <li><b>.NET and low-code</b> A C# background, and a decade of OutSystems architecture work alongside it.</li>
+        </ul>
+      </div>
+      <div class="cred">
+        <h4>Certifications</h4>
+        <ul>
+          <li><b>9&times; OutSystems certified</b> Including Architecture Specialist, Tech Lead and Certified Trainer.</li>
+          <li><b>AWS Certified Cloud Practitioner</b></li>
+          <li><b>Microsoft Certified Trainer</b> Alumni.</li>
+        </ul>
+      </div>
+      <div class="cred">
+        <h4>Education and teaching</h4>
+        <ul>
+          <li><b>MSc Big Data Analytics</b> University of Liverpool. Dissertation: a graph-routed RAG retrieval engine.</li>
+          <li><b>Speaking</b> OutSystems Riyadh User Group, on generative AI inside low-code platforms.</li>
+          <li><b>Open source</b> Six public repositories, each with a README that states what its evaluation does not prove.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="contact" id="contact">
+    <h2>Working on something in this space?</h2>
+    <p>
+      I'm always glad to talk about agentic architectures, retrieval that holds up under
+      scrutiny, or how to get an engineering team using AI tools without lowering the bar.
+      Ideas, questions and disagreements all welcome.
+    </p>
+    <div class="links">
+      <a class="solid" data-email data-email-text href="mailto:">Email</a>
+      <a href="{{ site.linkedin }}" rel="me noopener">LinkedIn</a>
+      <a href="{{ site.github }}" rel="me noopener">GitHub</a>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,23 @@
+<footer class="foot">
+  <div class="wrap">
+    <p>© {{ site.time | date: "%Y" }} {{ site.title }}</p>
+    <nav>
+      <a href="{{ site.github }}" rel="me noopener">GitHub</a>
+      <a href="{{ site.linkedin }}" rel="me noopener">LinkedIn</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // The address is assembled in the browser so it is not sitting in the page
+  // source as one harvestable string.
+  (function () {
+    var u = "{{ site.email_user }}", d = "{{ site.email_domain }}";
+    document.querySelectorAll("[data-email]").forEach(function (el) {
+      var a = u + "@" + d;
+      el.setAttribute("href", "mailto:" + a);
+      if (el.hasAttribute("data-email-text")) el.textContent = a;
+    });
+  })();
+</script>

@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<article class="article">
+  <div class="wrap narrow">
+    <a class="back" href="{{ '/writing/' | relative_url }}">&larr; Writing</a>
+    <h1>{{ page.title }}</h1>
+    <p class="dateline">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>
+      {% if page.reading_time %} &middot; {{ page.reading_time }}{% endif %}
+    </p>
+    {% if page.summary %}<p class="summary">{{ page.summary }}</p>{% endif %}
+
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    <div class="article-end">
+      <p>
+        Written by {{ site.title }}.
+        <a data-email href="mailto:">Reply by email</a>,
+        or find me on <a href="{{ site.linkedin }}" rel="me noopener">LinkedIn</a>.
+        New posts by <a href="{{ '/feed.xml' | relative_url }}">RSS</a>.
+      </p>
+    </div>
+  </div>
+</article>

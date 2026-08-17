@@ -1,0 +1,38 @@
+---
+layout: default
+title: Writing
+permalink: /writing/
+description: Notes on agentic AI, retrieval, evaluation and getting engineering teams working well with AI tools.
+---
+
+<section class="hero" style="padding-bottom:44px">
+  <div class="wrap">
+    <p class="eyebrow">Writing</p>
+    <h1>Notes from building</h1>
+    <p class="lede">
+      Mostly the parts that didn't work first time. Agentic architectures, retrieval,
+      evaluation, and what changes when a team starts writing code with a model.
+    </p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    {% if site.posts.size > 0 %}
+    <div class="posts">
+      {% for post in site.posts %}
+      <a class="post-row" href="{{ post.url | relative_url }}">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.summary | default: post.excerpt | strip_html | truncatewords: 34 }}</p>
+      </a>
+      {% endfor %}
+    </div>
+    <p style="margin-top:26px;font-size:15px;color:#8a939f">
+      Prefer a reader? <a href="{{ '/feed.xml' | relative_url }}">Subscribe by RSS</a>.
+    </p>
+    {% else %}
+    <div class="empty">No posts published yet. The first one is being written.</div>
+    {% endif %}
+  </div>
+</section>

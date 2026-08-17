@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------------------
+# The project cards on the home page. Edit here, not in index.html.
+# `image` is the file name stem in assets/img/ — the card uses <stem>-card.webp
+# and links through to <stem>.webp at full size.
+# ---------------------------------------------------------------------------
+
+- title: Graph-Routed Memory
+  kicker: "A controlled RAG experiment, and why the hypothesis failed."
+  image: graph-routed-memory
+  alt: "Architecture of the Graph-Routed Memory retrieval engine: ingestion into a graph store and vector index, a graph-first router, and an executor agent with an evaluation harness."
+  points:
+    - "The hypothesis was that routing a query through a knowledge graph before falling back to vector search would cut token cost without costing accuracy. On 50 multi-hop HotpotQA questions it cut tokens by <b>5.5%</b> and dropped mean answer F1 from <b>0.088 to 0.055</b>. A parameter sweep confirmed the pattern was systematic rather than a bad run."
+    - "The useful half was working out why. The multi-hop path-scoring layer, the part meant to create the advantage, was <b>silently inactive for the entire benchmark</b>: ingestion called a method that didn't exist and a bare <code>except</code> swallowed the error."
+    - "Shipped as a service rather than a notebook. FastAPI backend, Streamlit dashboard, Docker Compose, pytest in CI, and an offline benchmark harness that reproduces the routing numbers with no API key."
+  note: "MSc Big Data Analytics dissertation artefact, University of Liverpool."
+  links:
+    - text: "Repository"
+      url: "https://github.com/omarmaali/graph-routed-memory"
+  tags: [RAG, Knowledge graphs, FastAPI, Evaluation design]
+
+- title: Acme Support Assistant
+  kicker: "A support assistant that cites its sources, and refuses when it cannot."
+  image: acme-support-rag
+  alt: "Architecture of a retrieval-augmented support assistant: heading-aware ingestion into a Chroma vector store, then a per-question query path passing through four guardrails before an answer or a refusal."
+  points:
+    - "A chatbot that invents a refund window creates a commitment the customer will hold you to. So the requirement isn't to answer as much as possible, it's to answer only what the documents support, show the receipt, and hand the rest to a human."
+    - "Four independent guardrails can each decline to answer, including an <b>answerability gate</b>: similarity says the evidence is on the same topic, this asks whether it contains the fact you actually requested."
+    - "On a held-out paraphrase set written in customer language: <b>9/10 correct, 100% citation accuracy, 5/5 out-of-scope questions refused, zero hallucinations</b>. Switching the answerability guardrail off buys one more correct answer and two confident wrong ones."
+  note: "All sample content is invented for the demo."
+  links:
+    - text: "Repository"
+      url: "https://github.com/omarmaali/acme-support-rag"
+  tags: [RAG, Guardrails, LangChain, Chroma, Evaluation]
+
+- title: Acme Triage Agent
+  kicker: "An agent with full autonomy on reading and a hard gate on acting."
+  image: acme-triage-agent
+  alt: "Architecture of a support triage agent: an autonomous agent loop that classifies, retrieves and drafts, five guardrails in the tool layer, then a human approval gate before any helpdesk write."
+  points:
+    - "It reads a ticket, classifies it, drafts a grounded reply and proposes helpdesk actions. Then it stops. <b>Nothing reaches the helpdesk until a human approves it</b>, and customer replies can never be auto-approved at any setting."
+    - "Five guardrails enforced in the tool layer rather than the prompt, so removing a line from the system prompt cannot switch them off. Each has a test that fails if the guardrail is removed."
+    - "Auditing the finished code against its own README before publishing turned up <b>twelve real bugs</b>, including an ordering fault that could send a customer reply and then log it as failed. Every fix carries a regression test confirmed to fail against the old code."
+  note: "119 tests. Runs with or without an API key."
+  links:
+    - text: "Repository"
+      url: "https://github.com/omarmaali/acme-triage-agent"
+  tags: [AI agents, Human-in-the-loop, OpenAI tool use, FastAPI]
+
+- title: llmcheck
+  kicker: "Four command-line tools that find the guardrails nothing is testing."
+  image: llmcheck
+  alt: "Architecture of the llmcheck toolkit: an LLM project and test suite feeding four tools — regress, mutate, costs and report — each writing a JSON artifact that rolls up into one markdown report."
+  points:
+    - "<code>mutate</code> switches each of your guardrails off one at a time, re-runs your suite, and reports which ones nothing was covering. A passing suite tells you the code you have works; it cannot tell you a test would fail if someone deleted a particular line."
+    - "Pointed at my own two agent projects, it scored one at <b>62%</b>. I nearly published that number. Three of the survivors were false, because the tests bypassed the switch. The honest score was 9 of 9, plus <b>one real gap</b>: a system prompt I could replace with \"answer however you like\" and keep the suite green."
+    - "So the tool now warns about its own weakest signal: a patch survivor is evidence, a config survivor is only a question. That warning exists because the tool was wrong about my code first."
+  note: "253 tests, green on Linux and Windows. One runtime dependency."
+  links:
+    - text: "Repository"
+      url: "https://github.com/omarmaali/llmcheck"
+  tags: [Testing, Mutation testing, Cost tracking, Python CLI]
+
+- title: AI Dev Playbook
+  kicker: "An adoption framework for engineering teams using AI coding tools."
+  image: ai-dev-playbook
+  alt: "The spec, generate, review, test loop: humans own the spec and the review, the model owns the typing, and checks failing sends work back to the spec rather than to a patch."
+  points:
+    - "Teams adopting AI coding tools usually get one of two things from leadership: a ban, or a shrug. This is the third option, built around one loop — <b>spec, generate, review, test</b> — with five guides covering the workflow, reviewing AI-authored diffs, security and IP rules, evaluation, and team rollout."
+    - "Grounded in published evidence rather than vendor claims. The testing chapter exists because a mutation-testing pass over two of my own projects found <b>four guardrails whose tests could never fail</b>."
+    - "Ships a prompt-template library for the recurring jobs, a reviewer's checklist for AI-authored diffs, and a one-page team working agreement."
+  links:
+    - text: "Repository"
+      url: "https://github.com/omarmaali/ai-dev-playbook"
+  tags: [AI adoption, Code review, Governance, Team enablement]
+
+- title: Generative AI Assistant in OutSystems 11
+  kicker: "A business-aware assistant built natively inside a low-code platform."
+  image: outsystems-genai
+  alt: "End-to-end architecture of a generative AI assistant inside OutSystems 11: user question, client and server actions, request build, LLM service, response parsing and a chat UI."
+  points:
+    - "Answers with numbered, policy-aligned steps drawn from a controlled system prompt, so replies follow company procedure instead of the model's own idea of it."
+    - "Built from client and server actions and native REST integration, with keys held in Site Properties. The result is portable and maintainable by the low-code team that owns the app, not a bolt-on nobody can change."
+    - "Secured and governed by design: API keys out of the codebase, token limits, timeout fallback and single-turn answers for predictable, auditable behaviour."
+  note: "Presented live at the OutSystems Riyadh User Group."
+  links:
+    - text: "Read the write-up"
+      url: "SITE_OUTSYSTEMS_ARTICLE"
+  tags: [OutSystems, Low-code, LLM integration, Enterprise architecture]

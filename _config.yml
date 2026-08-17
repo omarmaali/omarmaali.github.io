@@ -1,0 +1,47 @@
+# ---------------------------------------------------------------------------
+# Site settings. Everything you are likely to change lives in this file.
+# After editing, commit and push — GitHub Pages rebuilds automatically.
+# ---------------------------------------------------------------------------
+
+title: Omar Maali Hussein
+tagline: Solution Architect · AI Engineer
+description: >-
+  Solution architect and AI engineer. Agentic systems, retrieval, and the
+  evaluation work most teams skip — published with the evidence.
+
+# The live address of the site. Change this if you move to a custom domain,
+# e.g. url: "https://omarmaali.com"
+url: "https://omarmaali.github.io"
+baseurl: ""
+
+# --- Contact and profiles ---------------------------------------------------
+# The email is split in two so it is not sitting in the HTML as one string
+# for scrapers to lift. The page reassembles it in the browser.
+email_user: omarmaali86
+email_domain: gmail.com
+
+linkedin: "https://www.linkedin.com/in/omarmaali/"
+github: "https://github.com/omarmaali"
+outsystems_article: "https://www.linkedin.com/pulse/embedding-generative-ai-outsystems-11-assistant-module-omar-hussein-spqsf/"
+
+# --- Build ------------------------------------------------------------------
+permalink: /writing/:title/
+timezone: Asia/Riyadh
+markdown: kramdown
+kramdown:
+  syntax_highlighter_opts:
+    default_lang: text
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
