@@ -17,8 +17,8 @@ baseurl: ""
 # --- Contact and profiles ---------------------------------------------------
 # The email is split in two so it is not sitting in the HTML as one string
 # for scrapers to lift. The page reassembles it in the browser.
-email_user: omarmaali86
-email_domain: gmail.com
+email_user: omrr
+email_domain: outlook.com
 
 linkedin: "https://www.linkedin.com/in/omarmaali/"
 github: "https://github.com/omarmaali"
