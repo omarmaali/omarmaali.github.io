@@ -45,3 +45,5 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+
+image: /assets/img/og-card.png
