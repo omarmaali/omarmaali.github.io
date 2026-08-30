@@ -46,4 +46,11 @@ exclude:
   - Gemfile.lock
   - vendor
 
-image: /assets/img/og-card.png
+# Default social-preview image for every page. jekyll-seo-tag reads `image`
+# from a page's front matter, not from a bare site-level key, so it is applied
+# to all pages here via Jekyll front matter defaults.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/img/og-card.png
