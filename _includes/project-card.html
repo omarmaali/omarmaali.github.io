@@ -1,0 +1,32 @@
+{%- comment -%}
+  One project card. Used by the Work and Teaching sections of index.html.
+  Content lives in _data/projects.yml; entries with `group: teaching` render
+  under Teaching, everything else under Work.
+{%- endcomment -%}
+{% assign p = include.p %}
+{% assign anchor = p.title | downcase | replace: ' ', '-' | replace: '&', 'and' %}
+<article class="proj" id="{{ anchor }}">
+  <div class="shot">
+    <a href="{{ '/assets/img/' | append: p.image | append: '.webp' | relative_url }}"
+       title="Open the full-size diagram">
+      <img src="{{ '/assets/img/' | append: p.image | append: '-card.webp' | relative_url }}"
+           alt="{{ p.alt }}" loading="lazy" decoding="async">
+    </a>
+  </div>
+  <div class="body">
+    <h3>{{ p.title }}</h3>
+    <p class="kicker">{{ p.kicker }}</p>
+    <ul>
+      {% for pt in p.points %}<li>{{ pt }}</li>{% endfor %}
+    </ul>
+    <div class="tags">
+      {% for t in p.tags %}<span>{{ t }}</span>{% endfor %}
+    </div>
+    <div class="meta">
+      {% for l in p.links %}
+      <a href="{% if l.url == 'SITE_OUTSYSTEMS_ARTICLE' %}{{ site.outsystems_article }}{% else %}{{ l.url }}{% endif %}" rel="noopener">{{ l.text }} &rarr;</a>
+      {% endfor %}
+      {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
+    </div>
+  </div>
+</article>

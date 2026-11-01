@@ -175,6 +175,12 @@ section + section{padding-top:0}
 .contact .links a.solid{background:#fff;color:var(--ink);border-color:#fff}
 .contact .links a.solid:hover{background:#e9edf2;color:#000}
 
+/* --- teaching ------------------------------------------------------------ */
+.teach{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:22px}
+.teach .cred ul{gap:14px}
+.cred li .ref{display:block;margin-top:4px;font-size:13.5px;color:var(--faint)}
+.cred li .ref a{font-weight:500}
+
 /* --- footer -------------------------------------------------------------- */
 .foot{border-top:1px solid var(--line);padding:30px 0 46px}
 .foot .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
@@ -216,6 +222,7 @@ section + section{padding-top:0}
   .proj{grid-template-columns:1fr}
   .proj .shot{border-right:0;border-bottom:1px solid var(--line-soft);padding:18px}
   .creds{grid-template-columns:1fr}
+  .teach{grid-template-columns:1fr}
   .nav ul{gap:18px}
 }
 @media (max-width:680px){

@@ -5,3 +5,7 @@ _site/
 Gemfile.lock
 .DS_Store
 Thumbs.db
+
+# Local editor and Windows files, not part of the site
+.vs/
+*.lnk

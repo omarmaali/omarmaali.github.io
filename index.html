@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Omar Maali Hussein — Solution Architect & AI Engineer
+title: Omar Maali Hussein — Solution Architect, AI Engineer & Trainer
 ---
 
 <section class="hero">
@@ -9,18 +9,21 @@ title: Omar Maali Hussein — Solution Architect & AI Engineer
     <h1>I build AI systems that know what they don&rsquo;t know.</h1>
     <p class="lede">
       Fifteen years designing enterprise systems, now spent on agentic AI, retrieval,
-      and the evaluation work most teams skip. Everything below is published with its
-      evidence, <em>including the results that went against me</em>.
+      and the evaluation work most teams skip. I also teach it, in English and Arabic.
+      Everything below is published with its evidence,
+      <em>including the results that went against me</em>.
     </p>
     <div class="cta">
       <a class="btn" href="#work">See the work</a>
+      <a class="btn ghost" href="#teaching">How I teach</a>
       <a class="btn ghost" href="#contact">Get in touch</a>
     </div>
     <div class="facts">
       <span><b>15 years</b> in solution architecture</span>
+      <span><b>Certified trainer</b> Microsoft &middot; OutSystems</span>
       <span><b>9&times;</b> OutSystems certified</span>
       <span><b>MSc</b> Big Data Analytics</span>
-      <span><b>6</b> published projects</span>
+      <span><b>7</b> published projects</span>
     </div>
   </div>
 </section>
@@ -75,7 +78,7 @@ title: Omar Maali Hussein — Solution Architect & AI Engineer
           fails, and a rollout that starts with a small pilot on low-risk work rather
           than a tool announcement.
         </p>
-        <p class="ref">Worked through in <a href="#ai-dev-playbook">AI Dev Playbook</a></p>
+        <p class="ref">Worked through in <a href="#ai-dev-playbook">AI Dev Playbook</a> and the <a href="#ai-dev-onboarding-programme">onboarding programme</a></p>
       </div>
     </div>
   </div>
@@ -93,32 +96,49 @@ title: Omar Maali Hussein — Solution Architect & AI Engineer
     </div>
 
     {% for p in site.data.projects %}
-    {% assign anchor = p.title | downcase | replace: ' ', '-' | replace: '&', 'and' %}
-    <article class="proj" id="{{ anchor }}">
-      <div class="shot">
-        <a href="{{ '/assets/img/' | append: p.image | append: '.webp' | relative_url }}"
-           title="Open the full-size diagram">
-          <img src="{{ '/assets/img/' | append: p.image | append: '-card.webp' | relative_url }}"
-               alt="{{ p.alt }}" loading="lazy" decoding="async">
-        </a>
-      </div>
-      <div class="body">
-        <h3>{{ p.title }}</h3>
-        <p class="kicker">{{ p.kicker }}</p>
+    {% if p.group == 'teaching' %}{% continue %}{% endif %}
+    {% include project-card.html p=p %}
+    {% endfor %}
+  </div>
+</section>
+
+<section id="teaching">
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">Teaching</p>
+      <h2>I teach from systems I&rsquo;ve built</h2>
+      <p>
+        Every topic below has a project on this page behind it. When a session gets to
+        retrieval or guardrail testing, there&rsquo;s a public repository with the real
+        numbers, including the ones that went badly.
+      </p>
+    </div>
+    <div class="teach">
+      <div class="cred">
+        <h4>Where I&rsquo;ve taught</h4>
         <ul>
-          {% for pt in p.points %}<li>{{ pt }}</li>{% endfor %}
+          <li><b>Microsoft Certified Trainer, STS Amman</b> Classroom courses for working IT professionals, and onboarding sessions for client teams.</li>
+          <li><b>A low-code practice, from nothing</b> Set up OutSystems, built the training path, and trained a developer group into a team that delivers.</li>
+          <li><b>Internal AI sessions</b> AI-assisted development for developers, QA and other departments. Same material, framed differently for each. QA ask the sharpest questions, because they want to know how you&rsquo;d test it.</li>
+          <li><b>Engineer onboarding</b> C# and .NET, architecture standards and delivery practice.</li>
+          <li><b>OutSystems Riyadh User Group</b> Generative AI inside OutSystems 11, presented live and <a href="{{ site.outsystems_article }}" rel="noopener">written up afterwards</a>.</li>
         </ul>
-        <div class="tags">
-          {% for t in p.tags %}<span>{{ t }}</span>{% endfor %}
-        </div>
-        <div class="meta">
-          {% for l in p.links %}
-          <a href="{% if l.url == 'SITE_OUTSYSTEMS_ARTICLE' %}{{ site.outsystems_article }}{% else %}{{ l.url }}{% endif %}" rel="noopener">{{ l.text }} &rarr;</a>
-          {% endfor %}
-          {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
-        </div>
       </div>
-    </article>
+      <div class="cred">
+        <h4>What I teach</h4>
+        <ul>
+          <li><b>AI-assisted development for engineering teams</b> The spec, generate, review, test loop, reviewing diffs you didn&rsquo;t write, and what never goes into a prompt. <span class="ref">Behind it: <a href="#ai-dev-playbook">AI Dev Playbook</a>, <a href="#ai-dev-onboarding-programme">onboarding programme</a></span></li>
+          <li><b>RAG systems that can say no</b> Grounding, citations, refusals, and checking whether an answer was actually supported. <span class="ref">Behind it: <a href="#acme-support-assistant">Acme Support Assistant</a></span></li>
+          <li><b>Evaluating LLM applications</b> Eval harnesses, rubrics, guardrail and mutation testing, cost and latency. <span class="ref">Behind it: <a href="#llmcheck">llmcheck</a></span></li>
+          <li><b>LLM integration for enterprise applications</b> Tool calling, structured output, failure modes, timeouts and cost control. <span class="ref">Behind it: <a href="#acme-triage-agent">Acme Triage Agent</a></span></li>
+          <li><b>Agentic AI for OutSystems developers</b> Where agents fit in a low-code architecture, and wiring LLM APIs in natively. <span class="ref">Behind it: <a href="#generative-ai-assistant-in-outsystems-11">GenAI Assistant in OutSystems 11</a></span></li>
+          <li><b>OutSystems architecture and certification prep</b> Architecture patterns, delivery governance, and the Architecture Specialist and Tech Lead exams. <span class="ref">Behind it: nine OutSystems certifications, including both of those</span></li>
+        </ul>
+      </div>
+    </div>
+
+    {% for p in site.data.projects %}
+    {% if p.group == 'teaching' %}{% include project-card.html p=p %}{% endif %}
     {% endfor %}
   </div>
 </section>
@@ -176,11 +196,11 @@ title: Omar Maali Hussein — Solution Architect & AI Engineer
         </ul>
       </div>
       <div class="cred">
-        <h4>Education and teaching</h4>
+        <h4>Education</h4>
         <ul>
           <li><b>MSc Big Data Analytics</b> University of Liverpool. Dissertation: a graph-routed RAG retrieval engine.</li>
-          <li><b>Speaking</b> OutSystems Riyadh User Group, on generative AI inside low-code platforms.</li>
-          <li><b>Open source</b> Six public repositories, each with a README that states what its evaluation does not prove.</li>
+          <li><b>BSc Computer Science</b> University of Jordan.</li>
+          <li><b>Open source</b> Six public repositories, each with a README that states what it does not prove.</li>
         </ul>
       </div>
     </div>
@@ -192,8 +212,9 @@ title: Omar Maali Hussein — Solution Architect & AI Engineer
     <h2>Working on something in this space?</h2>
     <p>
       I'm always glad to talk about agentic architectures, retrieval that holds up under
-      scrutiny, or how to get an engineering team using AI tools without lowering the bar.
-      Ideas, questions and disagreements all welcome.
+      scrutiny, how to get an engineering team using AI tools without lowering the bar,
+      or a workshop for a team that&rsquo;s just starting on it. Ideas, questions and
+      disagreements all welcome.
     </p>
     <div class="links">
       <a class="solid" data-email data-email-text href="mailto:">Email</a>

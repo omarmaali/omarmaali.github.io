@@ -35,12 +35,12 @@
 - title: Acme Triage Agent
   kicker: "An agent with full autonomy on reading and a hard gate on acting."
   image: acme-triage-agent
-  alt: "Architecture of a support triage agent: an autonomous agent loop that classifies, retrieves and drafts, five guardrails in the tool layer, then a human approval gate before any helpdesk write."
+  alt: "Architecture of a support triage agent: an autonomous agent loop that classifies, retrieves and drafts, six guardrails enforced in code, then a human approval gate before any helpdesk write."
   points:
     - "It reads a ticket, classifies it, drafts a grounded reply and proposes helpdesk actions. Then it stops. <b>Nothing reaches the helpdesk until a human approves it</b>, and customer replies can never be auto-approved at any setting."
-    - "Five guardrails enforced in the tool layer rather than the prompt, so removing a line from the system prompt cannot switch them off. Each has a test that fails if the guardrail is removed."
+    - "Six guardrails enforced in code rather than the prompt, so removing a line from the system prompt cannot switch them off. Each has a test that fails if the guardrail is removed."
     - "Auditing the finished code against its own README before publishing turned up <b>twelve real bugs</b>, including an ordering fault that could send a customer reply and then log it as failed. Every fix carries a regression test confirmed to fail against the old code."
-  note: "119 tests. Runs with or without an API key."
+  note: "130 tests. Runs with or without an API key."
   links:
     - text: "Repository"
       url: "https://github.com/omarmaali/acme-triage-agent"
@@ -86,3 +86,21 @@
     - text: "Read the write-up"
       url: "SITE_OUTSYSTEMS_ARTICLE"
   tags: [OutSystems, Low-code, LLM integration, Enterprise architecture]
+
+# --- Teaching -----------------------------------------------------------------
+# Entries with `group: teaching` render in the Teaching section, not under Work.
+
+- title: AI Dev Onboarding Programme
+  group: teaching
+  kicker: "A four-module course for teams adopting AI coding assistants, built on the playbook."
+  image: ai-dev-onboarding-program
+  alt: "Programme map: four modules of 90 to 120 minutes (the spec, generating with discipline, reviewing AI-written code, data rules and tests that can fail) leading to a rubric-graded capstone, each module built on one part of ai-dev-playbook."
+  points:
+    - "Four live modules of 90 to 120 minutes: writing a spec tight enough to delegate, generating with curated context, reviewing a diff you didn't write, and showing that a test can actually fail. Each ends with a five-question knowledge check."
+    - "The capstone is graded. Each participant takes one real task from their own backlog through the whole loop and hands in five artefacts, scored on a <b>five-criterion rubric</b>, one criterion per learning objective."
+    - "A facilitator guide covers a weekly run or a <b>two-day intensive</b>, a three-hour cut for non-engineering teams, and the recipe for the seeded diff that module 3 depends on."
+  note: "No cohort has run it yet, so it claims no participant outcomes."
+  links:
+    - text: "Repository"
+      url: "https://github.com/omarmaali/ai-dev-onboarding-program"
+  tags: [Curriculum design, Assessment, Facilitation, AI adoption]
